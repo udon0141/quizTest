@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>クイズ大会</title>
+</head>
+<body>
+  <h1>5th発売記念クイズ大会vol.1</h1>
+
+  <br><br><br>
+
+  <h2 id="count"></h2>
+  <P id="text">
+    ルールは固定ツイートにしてあるので、確認できていない方は1度目を通してください！<br>
+    結構難しいかもしれませんが、頑張ってください！
+  </P>
+
+  <p id="answer"></p>
+
+
+  <br><br><br>
+  
+  <div class="btn">
+    <button onclick="nextQuestion()">次の問題へ</button>
+  </div>
+
+  <br>
+
+  <div class="btn">
+    <button onclick="showAnswer()">解答表示</button>
+  </div>
+  
+  
+  <style>
+    body {
+      background-color: lightskyblue;
+    }
+
+    h1 {
+      font-size: 65px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-left: 50px;
+      font-size: 60px;
+    }
+
+    #text {
+      font-size: 50px;
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+
+    #answer {
+      margin-left: 50px;
+      font-size: 50px;
+      color: red;
+    }
+
+    .btn {
+      text-align: center;
+    }
+
+    button {
+      width: 100px;
+      height: 50px;
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+
+    var question = [
+      ["テスト1", "答え1"],
+      ["テスト2", "答え2"],
+      ["テスト3", "答え3"],
+      ["テスト4", "答え4"],
+      ["テスト5", "答え5"],
+      ["テスト6", "答え6"],
+      ["テスト7", "答え7"],
+      ["テスト8", "答え8"],
+      ["テスト9", "答え9"],
+      ["テスト10", "答え10"],
+      ["テスト11", "答え11"],
+      ["テスト12", "答え12"],
+      ["テスト13", "答え13"],
+      ["テスト14", "答え14"],
+      ["テスト15", "答え15"],
+      ["テスト16", "答え16"],
+      ["テスト17", "答え17"],
+      ["テスト18", "答え18"],
+      ["テスト19", "答え19"],
+      ["テスト20", "答え20"]
+    ];
+
+    function randomNum(num) {
+      let rand = Math.floor(Math.random() * num);
+      return rand;
+    }
+
+    var count = 0;
+    var num = 0;
+    var sentence
+    var timer;
+    var rand;
+
+    function oneWord() {
+      if(num < sentence.length) {
+        let base = document.getElementById("text").innerHTML;
+        document.getElementById("text").innerHTML = base + sentence.charAt(num);
+        num += 1;
+      }
+      else {
+        num = 0;
+        clearInterval(timer);
+      }
+    }
+
+    function nextQuestion() {
+      document.getElementById("count").innerHTML = "";
+      document.getElementById("text").innerHTML = "";
+      document.getElementById("answer").innerHTML = "";
+
+      count += 1;
+      document.getElementById("count").innerHTML = "第" +  count + "問";
+      rand = randomNum(question.length);
+
+      sentence = question[rand][0];
+
+      timer = setInterval(oneWord, 200);
+
+      question.splice(rand, 1);
+    }
+
+    function showAnswer() {
+      document.getElementById("answer").innerHTML = "A." + question[rand][1];
+    }
+  </script>
+
+</body>
+</html>
