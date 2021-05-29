@@ -129,12 +129,11 @@
       sentence = question[rand][0];
 
       timer = setInterval(oneWord, 200);
-
-      question.splice(rand, 1);
     }
 
     function showAnswer() {
       document.getElementById("answer").innerHTML = "A." + question[rand][1];
+      question.splice(rand, 1);
     }
   </script>
 
